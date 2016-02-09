@@ -1,12 +1,1 @@
-
-main.py
-
-etc/config.py
-
-programm/__main__.py
-
-programm/config.py
-
-programm/start.py
-
-start.sh
+__main__.py
