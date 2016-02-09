@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 '''
     Created by Ilja Grebel on 08.02.2016
-    Version 1.000
+    Version 1.001
+    
     
     TODO:
     - Set recording to pause
@@ -14,22 +15,18 @@
     - Make Directory for save every screenshot and record
     - Correct timestamp
     - Logic
+    - Image effects + params
+    -
     '''
 
 from flask import Flask
-from dateutil.tz import tzutc
-from flask import jsonify
-from flask import request
 import datetime
 import io
 import time
-import logging
 import sys
 import os
 from threading import Lock
 import picamera
-import errno
-import traceback
 import socket
 if sys.version_info[0] == 2:
     from cStringIO import StringIO as bio
