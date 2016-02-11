@@ -41,3 +41,14 @@ http://rpi-ip:8080/screenshot
 
 The directories will be created in the same folder where __main__.py is placed
 This project is at developming at moment, but function described from above working.
+
+Plans for the future
+
+- API Website to controll RPi camera
+- Change RPi Settings over API
+- Change capture settings over API
+- Watch captured images and videos over Website API
+- Watch stream over Website API
+- JSON responses
+
+and more...
