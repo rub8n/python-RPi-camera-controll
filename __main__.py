@@ -12,15 +12,14 @@
     
     #######################################################
     
-    TODO:
+    -TODO:
     - Set recording to pause
     - Sys. configuration
-    - Save Screenshots in different format
-    - Save recording in differtent raw format. Currently only .h264
+    - Save Screenshots in different format. At moment you can change format in python script
+    - Save recording in differtent raw format. Currently only .h264. At moment you can change format in python script
     - Logic
     - Stop and start streaming | not FFmpeg udp streaming
     - Image effects + params
-    -
     '''
 # Set default encoding to UTF-8
 from flask import Flask

@@ -1,4 +1,41 @@
-******** README ********
+Python-Raspberry-Contoll-Managment
+#######################################################
 
-Project not finished.
-Stand by.
+TODO:
+    - Set recording to pause
+    - Sys. configuration
+    - Save Screenshots in different format. At moment you can change format in python script
+    - Save recording in differtent raw format. Currently only .h264. At moment you can change format in python script
+    - Logic
+    - Stop and start streaming | not FFmpeg udp streaming
+    - Image effects + params
+	
+Installation:
+
+You need to install FFmpeg for RPi, if you want to use UDP stream and convert .h264 to .mp4. I will find a solution for streaming without FFmpeg soon.
+
+- sudo pip install flask
+- sudo pip install picamera
+- git clone https://github.com/IljaGrebel/python-RPi-camera-controll
+- cd python-RPi-camera-controll
+
+Using:
+- python __main__.py to start the script
+
+You need some HTTP Requester to send request to RPi
+# Start Record
+http://rpi-ip:8080/start_record
+
+# Stop record
+http://rpi-ip:8080/stop_record
+
+# Start stream
+http://rpi-ip:8080/start_stream
+
+# Stop stream
+http://rpi-ip:8080/stop_stream
+
+# Make screenshots
+http://rpi-ip:8080/screenshot
+
+This project is at developming at moment, but function described from above working.
