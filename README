@@ -38,4 +38,5 @@ http://rpi-ip:8080/stop_stream
 # Make screenshots
 http://rpi-ip:8080/screenshot
 
+The directories will be created in the same folder where __main__.py is placed
 This project is at developming at moment, but function described from above working.
