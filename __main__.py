@@ -5,7 +5,7 @@
     #######################################################
     
     Created by Ilja Grebel on 08.02.2016
-    Version 1.004
+    Version 1.005
     
     :| Copyright |: 2016, Ilja Grebel - igrebel@icloud.com
     :| license   |: Not licensed now
@@ -44,13 +44,14 @@ camlock = Lock()  # Needed to block access from multi responses
 record_dir = ''
 img_dir = ''
 record_file = 'video'
+img_file = 'image'
 
 app = Flask(__name__)
 
 #################
 # CONFIGURATION #
-# video_fmt = ''
-# img_fmt = ''
+video_fmt = '.h264'
+img_fmt = '.jpeg'
 # resolution = ''
 # img_effect = ''
 
@@ -65,8 +66,9 @@ def timestamp():
 def mkdir():
     now = timestamp()
     global record_dir
+    global img_dir
     record_dir = './record-%s/' % now
-    img_dir = record_dir + '/images'
+    img_dir = record_dir + '/images/'
     os.mkdir(record_dir)
     os.mkdir(img_dir)
 
@@ -77,13 +79,13 @@ def start_capture():
     global camera
     with camlock:
         if camera:
-            return 'already recording ' + record_file + ".h264"
+            return 'already recording ' + record_file + video_fmt
         mkdir()
         camera = picamera.PiCamera()
         camera.resolution = (1920, 1080)
         camera.start_preview()
-        camera.start_recording(record_dir + record_file + ".h264")
-    return 'Recording to ' + record_file + ".h264"
+        camera.start_recording(record_dir + record_file + video_fmt)
+    return 'Recording to ' + record_file + video_fmt
 
 # PAUSE RECORD - NOT WORKING AT MOMENT
 @app.route("/pause_record", methods=['POST'])
@@ -91,10 +93,10 @@ def pause_record():
     global camera
     with camlock:
         if camera:
-            return 'already paused ' + record_file + ".h264"
+            return 'already paused ' + record_file + video_fmt
         camera = picamera.PiCamera()
         wait_recording(900000)
-    return 'Recording to ' + record_file + ".h264" + ' paused'
+    return 'Recording to ' + record_file + video_fmt + ' paused'
 
 # STOP RECODING
 @app.route("/stop_record", methods=['POST'])
@@ -104,8 +106,8 @@ def stop_capture():
         if not camera:
             return 'already stopped'
         camera.stop_recording()
-        camera = None
         h264_to_mp4()
+        camera = None
     return 'Record Stopped, converting .h264 to .mp4'
 
 # START STREAM
@@ -123,11 +125,11 @@ def stop_stream():
 
 # MP4
 def h264_to_mp4():
-    cmd = ('ffmpeg -i %s -vcodec copy -an -f mp4 %s.mp4') % (record_file + ".h264", record_file)
+    cmd = ('ffmpeg -i %s -vcodec copy -an -f mp4 %s.mp4') % (record_dir + record_file + video_fmt, record_dir + record_file)
     os.system(cmd)
     return 'Creating .MP4 File'
-    os.remove(record_file + ".h264")
-    return '.h264 File deleted'
+    #os.remove(record_dir + record_file + ".h264")
+    #return '.h264 File deleted'
 
 # FOR COUNTER
 def static_var(varname, value):
@@ -144,7 +146,7 @@ def screenshot():
         screenshot.counter += 1
         if not camera:
             return 'Camera is not started'
-        camera.capture(img_dir + '%d-image.jpeg' % (screenshot.counter), use_video_port=True)
+        camera.capture((img_dir + '%s-' + img_file + img_fmt) % (screenshot.counter), use_video_port=True)
     return 'Saved to %d-image.jpeg' % (screenshot.counter)
 
 
