@@ -118,9 +118,6 @@ def start_stream():
     return 'UPD Stream is started at udp://@239.239.2.1:1234'
 
 # STOP STREAM
-@app.route("/stop_stream", methods=['POST'])
-def stop_stream():
-    os.kill(ffmpeg)
 
 # MP4
 def h264_to_mp4():

@@ -31,9 +31,10 @@ http://rpi-ip:8080/stop_record
 
 # Start stream
 http://rpi-ip:8080/start_stream
+You cant make screenshots yet, if stream is started
 
 # Stop stream
-http://rpi-ip:8080/stop_stream
+http://rpi-ip:8080/stop_stream - in dev.
 
 # Make screenshots
 http://rpi-ip:8080/screenshot
